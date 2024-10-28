@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import styles from "./page.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-const Login = ({ url }) => {
+const Login = () => {
   const session = useSession();
   const router = useRouter();
   const params = useSearchParams();
@@ -18,11 +18,11 @@ const Login = ({ url }) => {
   }, [params]);
 
   if (session.status === "loading") {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (session.status === "authenticated") {
-    router?.push("/dashboard")
+    router.push("/dashboard");
   }
 
   const handleSubmit = async (e) => {
@@ -34,8 +34,8 @@ const Login = ({ url }) => {
     signIn("credentials", {
       email,
       password,
-    })
-  }
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -56,13 +56,13 @@ const Login = ({ url }) => {
           className={styles.input}
         />
         <button className={styles.button}>Login</button>
-        {error && error}
+        {error && <p className={styles.error}>{error}</p>}
       </form>
       <button
         onClick={() => {
           signIn("github");
         }}
-        className={styles.button + " " + styles.google}
+        className={`${styles.button} ${styles.google}`}
       >
         Login with Github
       </button>
@@ -74,4 +74,10 @@ const Login = ({ url }) => {
   );
 };
 
-export default Login;
+const LoginWithSuspense = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Login />
+  </Suspense>
+);
+
+export default LoginWithSuspense;
