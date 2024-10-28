@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./NavBar.module.css";
-import DarkModeToggle from "../darkmodetoggle/DarkModeToggle";
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 import { signOut, useSession } from "next-auth/react";
 
 const links = [
