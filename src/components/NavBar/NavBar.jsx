@@ -40,6 +40,7 @@ const links = [
 
 const NavBar = () => {
   const session = useSession();
+  console.log(process.env.NEXTAUTH_URL)
 
   return (
     <nav className={styles.container}>
