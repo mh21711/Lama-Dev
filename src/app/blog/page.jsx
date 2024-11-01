@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 async function getData() {
-  const res = await fetch("https://lama-dev-217elrashedy/api/posts", {
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/posts`, {
     cache: "no-store",
   });
 
