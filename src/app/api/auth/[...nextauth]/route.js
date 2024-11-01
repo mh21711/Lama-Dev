@@ -1,5 +1,5 @@
-import User from "@/models/User";
-import connect from "@/utils/db";
+import User from "../../../../models/User";
+import connect from "../../../../utils/db";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import bcrypt from "bcryptjs";

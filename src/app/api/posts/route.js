@@ -1,6 +1,6 @@
-import Post from "@/models/Post";
-import User from "@/models/User";
-import connect from "@/utils/db";
+import Post from "../../../models/Post";
+import User from "../../../models/User";
+import connect from "../../../utils/db";
 import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
