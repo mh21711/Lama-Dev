@@ -10,7 +10,10 @@ export const GET = async (request) => {
   // Fetch Data
   try {
     await connect();
-    const posts = await Post.find(email && { email });
+    const user = await User.findOne({ email: email });
+    console.log(user);
+
+    const posts = await Post.find({ username: user.username });
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch {
     return new NextResponse("Database Error", { status: 500 });
@@ -40,10 +43,11 @@ export const POST = async (request) => {
     await connect();
     await newPost.save(); // Await save operation
 
-    return new NextResponse("Post Has Been Created Successfully", { status: 201 });
+    return new NextResponse("Post Has Been Created Successfully", {
+      status: 201,
+    });
   } catch (error) {
     console.error("Error creating post:", error);
     return new NextResponse("Database Error", { status: 500 });
   }
 };
-
